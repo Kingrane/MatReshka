@@ -1,0 +1,17 @@
+2025-03-03 19:38:28,998 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.147:5000
+2025-03-03 19:38:28,998 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-03 19:38:28,999 - werkzeug - INFO -  * Restarting with stat
+2025-03-03 19:38:29,653 - werkzeug - WARNING -  * Debugger is active!
+2025-03-03 19:38:29,654 - werkzeug - INFO -  * Debugger PIN: 225-928-825
+2025-03-03 19:38:32,655 - werkzeug - INFO - 127.0.0.1 - - [03/Mar/2025 19:38:32] "GET / HTTP/1.1" 200 -
+2025-03-03 19:38:32,729 - werkzeug - INFO - 127.0.0.1 - - [03/Mar/2025 19:38:32] "GET /static/css/style.css HTTP/1.1" 200 -
+2025-03-03 19:38:32,734 - werkzeug - INFO - 127.0.0.1 - - [03/Mar/2025 19:38:32] "GET /static/js/script.js HTTP/1.1" 200 -
+2025-03-03 19:38:32,967 - werkzeug - INFO - 127.0.0.1 - - [03/Mar/2025 19:38:32] "GET / HTTP/1.1" 200 -
+2025-03-03 19:38:33,303 - werkzeug - INFO - 127.0.0.1 - - [03/Mar/2025 19:38:33] "[33mGET /static/favicon.ico HTTP/1.1[0m" 404 -
+2025-03-03 19:38:48,956 - __main__ - INFO - Отправка текстового запроса к Mistral API
+2025-03-03 19:38:56,269 - httpx - INFO - HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-03 19:38:56,278 - __main__ - INFO - Текстовый запрос обработан за 7.79 секунд
+2025-03-03 19:38:56,291 - werkzeug - INFO - 127.0.0.1 - - [03/Mar/2025 19:38:56] "POST /solve_text HTTP/1.1" 200 -

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МатРешка - Решение математических задач</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Подключение MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>МатРешка</h1>
+                <p class="tagline">Умный помощник для решения математических задач</p>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="image-tab">Загрузить изображение</button>
+            <button class="tab-btn" data-tab="text-tab">Ввести задачу</button>
+        </div>
+
+        <div class="tab-content">
+            <!-- Загрузка изображения -->
+            <div id="image-tab" class="tab-pane active">
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-info">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Перетащите файл сюда или нажмите для выбора</p>
+                        <p class="upload-hint">Поддерживаемые форматы: JPG, PNG, GIF (до 5 MB)</p>
+                    </div>
+                    <input type="file" id="file-input" accept=".jpg, .jpeg, .png, .gif" hidden>
+                </div>
+
+                <div class="image-preview-container" style="display: none;">
+                    <div class="preview-header">
+                        <h3>Предпросмотр изображения</h3>
+                        <button id="remove-image" class="icon-button"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="image-preview">
+                        <img id="preview-image" src="#" alt="Предпросмотр">
+                    </div>
+                </div>
+
+                <div class="additional-prompt">
+                    <label for="additional-text">Дополнительное пояснение (необязательно):</label>
+                    <textarea id="additional-text" placeholder="Например: Пожалуйста, покажи подробное решение и объясни каждый шаг"></textarea>
+                </div>
+
+                <button id="solve-image-btn" class="solve-btn" disabled>
+                    <i class="fas fa-calculator"></i> Решить задачу
+                </button>
+            </div>
+
+            <!-- Ввод текста -->
+            <div id="text-tab" class="tab-pane">
+                <div class="text-input-container">
+                    <label for="math-problem-text">Введите условие задачи:</label>
+                    <textarea id="math-problem-text" placeholder="Например: Решите квадратное уравнение: 3x² - 14x + 8 = 0"></textarea>
+                </div>
+
+                <button id="solve-text-btn" class="solve-btn" disabled>
+                    <i class="fas fa-calculator"></i> Решить задачу
+                </button>
+            </div>
+        </div>
+
+        <!-- Результат решения -->
+        <div id="solution-container" class="solution-container" style="display: none;">
+            <div class="solution-header">
+                <h2>Решение задачи</h2>
+                <button id="copy-solution" class="icon-button" title="Копировать решение">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <div id="loading-indicator" class="loading-indicator">
+                <div class="spinner"></div>
+                <p>Решаем задачу...</p>
+            </div>
+            <div id="solution-content" class="solution-content"></div>
+        </div>
+
+        <!-- Секция примеров задач -->
+        <div class="examples-section">
+            <h2>Примеры задач, которые может решить МатРешка</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <h3>Алгебра</h3>
+                    <ul>
+                        <li>Решение уравнений и систем уравнений</li>
+                        <li>Разложение на множители</li>
+                        <li>Работа с дробями и степенями</li>
+                    </ul>
+                </div>
+                <div class="example-card">
+                    <h3>Геометрия</h3>
+                    <ul>
+                        <li>Вычисление площадей и объемов</li>
+                        <li>Теоремы планиметрии</li>
+                        <li>Координатная геометрия</li>
+                    </ul>
+                </div>
+                <div class="example-card">
+                    <h3>Тригонометрия</h3>
+                    <ul>
+                        <li>Тригонометрические тождества</li>
+                        <li>Решение тригонометрических уравнений</li>
+                        <li>Преобразование выражений</li>
+                    </ul>
+                </div>
+                <div class="example-card">
+                    <h3>Математический анализ</h3>
+                    <ul>
+                        <li>Пределы и производные</li>
+                        <li>Интегралы</li>
+                        <li>Исследование функций</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 МатРешка - Все права защищены</p>
+            <div class="footer-links">
+                <a href="#">О сервисе</a>
+                <a href="#">Условия использования</a>
+                <a href="#">Политика конфиденциальности</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Модальное окно для ошибок -->
+    <div id="error-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-exclamation-circle"></i> Ошибка</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="error-message"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="close-modal-btn">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
