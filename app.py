@@ -17,7 +17,7 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "default_secret_key_for_development")
 
 # Получение API ключа из переменных окружения (или используем предоставленный)
-MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY", "cnYW87vD671nFClyTHkFEVOFYSz4FE3m")
+MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY", "wR1Cp3zVnrh13YXW2z2USxNQsqhNuOPZ")
 
 # Системный промпт для Mistral
 SYSTEM_PROMPT = """
